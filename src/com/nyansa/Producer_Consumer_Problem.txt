@@ -1,7 +1,7 @@
 Producer Consumer Problem
 
 The consumers are waiting in the blocked state for a producer to put item in the empty fifo_queue.
-Producer will put item in the queue and then signals. Signal only puts waiting thread in the running queue.
+Producer will put item in the queue and then signals. Signal only puts a waiting thread in the running queue.
 When producer signals, mutex is already unlocked. Therefore, other threads which may not be waiting in blocked state
 could take the lock before the thread which was placed in the running queue tries to acquire lock.
 Hence, other thread would process item before the signaled thread. Hence, when signaled thread will continue,
