@@ -10,11 +10,12 @@ import java.nio.file.Files;
 import java.text.DateFormat;
 import java.text.SimpleDateFormat;
 import java.util.Date;
+import java.util.HashMap;
+import java.util.Iterator;
 import java.util.Map;
 import java.util.Map.Entry;
 import java.util.Scanner;
 import java.util.TimeZone;
-import java.util.TreeMap;
 import static java.util.Collections.reverseOrder;
 
 
@@ -44,8 +45,9 @@ public class DailyURLHits {
 	 * 
 	 */
 	public static void sortAndPrint(Map<Long, Map<String, Integer>> hitCount) {
-		
-		for(Entry<Long,Map<String, Integer>> HitCountPerDay : hitCount.entrySet()) {
+		Iterator<Entry<Long, Map<String, Integer>>>  iterator = hitCount.entrySet().stream().sorted(Map.Entry.comparingByKey()).iterator();
+		while(iterator.hasNext()) {
+			Entry<Long, Map<String, Integer>> HitCountPerDay = iterator.next();
 			Date date = new Date(HitCountPerDay.getKey()*MICROSECONDS_IN_SECONDS*SECONDS_IN_MINUTE*MINUTES_IN_HOUR*HOURS_IN_DAY);
 			DateFormat df = new SimpleDateFormat("MM/dd/yyyy z");
 			df.setTimeZone(TimeZone.getTimeZone("GMT"));
@@ -74,7 +76,7 @@ public class DailyURLHits {
 		        Long day = epochToDate(split[0]);
 		        
 		        if(!hitCount.containsKey(day)) {
-		        		hitCount.put(day, new TreeMap<String, Integer>());
+		        		hitCount.put(day, new HashMap<String, Integer>());
 		        }
 		        
 		        if(hitCount.get(day).containsKey(split[1])) {
@@ -102,7 +104,7 @@ public class DailyURLHits {
 	 */
 	public static void main(String[] args) {
 		
-		Map<Long, Map<String, Integer>> hitCount = new TreeMap<Long,Map<String,Integer>>(); 	// to store daily URL Hit report 
+		Map<Long, Map<String, Integer>> hitCount = new HashMap<Long,Map<String,Integer>>(); 	// to store daily URL Hit report 
 		Scanner sc = new Scanner(System.in);
 		System.out.println("Please enter File path on console!");
 		String path = sc.nextLine();
