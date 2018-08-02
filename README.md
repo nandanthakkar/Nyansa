@@ -3,9 +3,8 @@
 Solution for Programming Exercise:
 
 m is number of URL hits.
-n is number of unique URLs.
 d is number of days.
-a is average number of unique URLs visited each day.
+a is maximum number of unique URLs visited on a day.
 
 ### Runtime complexity:
 ##### O(m) for reading each line of the file
