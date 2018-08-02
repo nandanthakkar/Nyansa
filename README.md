@@ -2,7 +2,7 @@
 
 Solution for Programming Exercise:
 
-m is number of URL hits.
+m is number of URL hits (lines in file).
 d is number of days.
 a is maximum number of unique URLs visited on a day.
 
